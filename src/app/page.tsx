@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Heart, Activity, Calendar, HelpCircle, Globe } from "lucide-react";
+import { Send, Heart, Activity, Calendar, HelpCircle, Globe, Shield } from "lucide-react";
+import Link from "next/link";
 
 type Message = {
   id: string;
@@ -144,13 +145,23 @@ export default function Home() {
               <p className="text-sm text-gray-600">{t.subtitle}</p>
             </div>
           </div>
-          <button
-            onClick={() => setLanguage(language === "en" ? "ms" : "en")}
-            className="flex items-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-          >
-            <Globe className="w-4 h-4" />
-            <span className="text-sm font-medium">{language === "en" ? "BM" : "EN"}</span>
-          </button>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/admin/login"
+              className="flex items-center gap-2 px-3 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg transition-colors"
+              title="Admin Portal"
+            >
+              <Shield className="w-4 h-4" />
+              <span className="text-sm font-medium hidden sm:inline">Admin</span>
+            </Link>
+            <button
+              onClick={() => setLanguage(language === "en" ? "ms" : "en")}
+              className="flex items-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            >
+              <Globe className="w-4 h-4" />
+              <span className="text-sm font-medium">{language === "en" ? "BM" : "EN"}</span>
+            </button>
+          </div>
         </div>
       </header>
 
