@@ -20,7 +20,7 @@ type Language = "en" | "ms";
 
 const translations = {
   en: {
-    title: "MyDoctor Health Assistant",
+    title: "Kliniku Health Assistant",
     subtitle: "Get health guidance and book appointments at Klinik Kesihatan Petaling Jaya",
     placeholder: "Describe your symptoms or ask a health question...",
     send: "Send",
@@ -31,7 +31,7 @@ const translations = {
     disclaimer: "⚠️ This is not a substitute for professional medical advice. For emergencies, call 999 immediately.",
   },
   ms: {
-    title: "Pembantu Kesihatan MyDoctor",
+    title: "Pembantu Kesihatan Kliniku",
     subtitle: "Dapatkan panduan kesihatan dan tempah temujanji di Klinik Kesihatan Petaling Jaya",
     placeholder: "Terangkan simptom atau tanya soalan kesihatan...",
     send: "Hantar",
@@ -288,3 +288,4 @@ export default function Home() {
     </div>
   );
 }
+
