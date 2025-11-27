@@ -73,7 +73,13 @@ export default function AdminDashboard() {
       dateTime: "Date & Time",
       reason: "Reason",
       status: "Status",
+      doctorNotes: "Doctor Notes",
+      notesPlaceholder: "Type notes...",
       actions: "Actions",
+      statusBooked: "Booked",
+      statusInProgress: "In Progress",
+      statusCompleted: "Completed",
+      statusCancelled: "Cancelled",
     },
     ms: {
       title: "Papan Pemuka Admin",
@@ -91,7 +97,13 @@ export default function AdminDashboard() {
       dateTime: "Tarikh & Masa",
       reason: "Sebab",
       status: "Status",
+      doctorNotes: "Nota Doktor",
+      notesPlaceholder: "Taip nota...",
       actions: "Tindakan",
+      statusBooked: "Ditempah",
+      statusInProgress: "Sedang Berjalan",
+      statusCompleted: "Selesai",
+      statusCancelled: "Dibatalkan",
     },
   }[lang];
 
@@ -286,7 +298,7 @@ export default function AdminDashboard() {
                       {t.status}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Doctor Notes
+                      {t.doctorNotes}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {t.actions}
@@ -301,6 +313,8 @@ export default function AdminDashboard() {
                       onStatusUpdate={updateAppointmentStatus}
                       onNotesUpdate={updateDoctorNotes}
                       isUpdating={updatingId === appointment.ID}
+                      lang={lang}
+                      t={t}
                     />
                   ))}
                 </tbody>
@@ -351,14 +365,29 @@ function AppointmentRow({
   onStatusUpdate,
   onNotesUpdate,
   isUpdating,
+  lang,
+  t,
 }: {
   appointment: Appointment;
   onStatusUpdate: (rowId: string, status: AppointmentStatus) => void;
   onNotesUpdate: (rowId: string, notes: string) => void;
   isUpdating: boolean;
+  lang: "en" | "ms";
+  t: any;
 }) {
   const currentStatus = (appointment.current_state || "Booked") as AppointmentStatus;
   const StatusIcon = STATUS_ICONS[currentStatus];
+  
+  // Map English status to translated display text
+  const getStatusDisplay = (status: AppointmentStatus) => {
+    const statusMap: Record<AppointmentStatus, string> = {
+      "Booked": t.statusBooked,
+      "In Progress": t.statusInProgress,
+      "Completed": t.statusCompleted,
+      "Cancelled": t.statusCancelled,
+    };
+    return statusMap[status] || status;
+  };
 
   return (
     <tr className="hover:bg-gray-50">
@@ -389,7 +418,7 @@ function AppointmentRow({
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${STATUS_COLORS[currentStatus]}`}
         >
           <StatusIcon className="w-3.5 h-3.5" />
-          {currentStatus}
+          {getStatusDisplay(currentStatus)}
         </span>
       </td>
       <td className="px-6 py-4">
@@ -399,7 +428,7 @@ function AppointmentRow({
             const notes = e.currentTarget.value;
             await onNotesUpdate(appointment.ID, notes);
           }}
-          placeholder="Type notes..."
+          placeholder={t.notesPlaceholder}
           rows={2}
           className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 resize-y"
         />
@@ -411,10 +440,10 @@ function AppointmentRow({
           disabled={isUpdating}
           className="text-sm border border-gray-300 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <option value="Booked">Booked</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-          <option value="Cancelled">Cancelled</option>
+          <option value="Booked">{t.statusBooked}</option>
+          <option value="In Progress">{t.statusInProgress}</option>
+          <option value="Completed">{t.statusCompleted}</option>
+          <option value="Cancelled">{t.statusCancelled}</option>
         </select>
       </td>
     </tr>
