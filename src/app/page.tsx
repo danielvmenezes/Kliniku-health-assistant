@@ -211,10 +211,12 @@ export default function Home() {
                 )}
                 <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                 <span className="text-xs opacity-70 mt-1 block">
-                  {message.timestamp.toLocaleTimeString("en-MY", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
+                  {message.timestamp
+                    .toLocaleTimeString("en-MY", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                    .toUpperCase()}
                 </span>
               </div>
             </div>
@@ -288,4 +290,3 @@ export default function Home() {
     </div>
   );
 }
-
