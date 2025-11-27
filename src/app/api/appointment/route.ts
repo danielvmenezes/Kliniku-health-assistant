@@ -40,6 +40,7 @@ export async function POST(req: NextRequest) {
           preferred_date: preferredDate,
           preferred_time: preferredTime,
           reason: reason,
+          current_state: "Booked",
         }],
         stream: false,
       }),

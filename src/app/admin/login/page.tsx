@@ -155,7 +155,7 @@ export default function AdminLogin() {
         <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
           <p className="text-xs text-gray-800 font-medium mb-2">{t.demo}</p>
           <div className="space-y-1 text-xs text-gray-900">
-            <p><strong>{t.admin}:</strong> admin / MyDoctor2025</p>
+            <p><strong>{t.admin}:</strong> admin / MyDoctor</p>
             <p><strong>{t.staff}:</strong> staff / Staff@123</p>
           </div>
         </div>
